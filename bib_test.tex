@@ -1,0 +1,747 @@
+\documentclass[english,preprint,aps,prd,showpacs,superscriptaddress,nofootinbib,tightenlines]{revtex4}
+\bibliographystyle{unsrt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setcounter{secnumdepth}{3}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage{ulem}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{slashbox}
+\usepackage{xcolor}
+\usepackage{babel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Put your definitions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Put your definitions here
+
+\def\bl{\mbox{\scriptsize\boldmath $\ell$}}
+\def\bll{\mbox{\boldmath $\ell$}}
+\def\bfnabla{\mbox{\boldmath $\nabla$}}
+\def\bfalpha{\mbox{\boldmath $\alpha$}}
+\def\bfpsi{\mbox{\boldmath $\psi$}}
+\def\bfeta{\mbox{\boldmath $\eta$}}
+\def\bfchi{\mbox{\boldmath $\chi$}}
+\def\bfgamma{\mbox{\boldmath $\gamma$}}
+\def\bfSigma{\mbox{\boldmath $\Sigma$}}
+\def\bfsigma{\mbox{\boldmath $\sigma$}}
+\def\bflambda{\mbox{\boldmath $\lambda$}}
+\def\bfrho{\mbox{\boldmath $\rho$}}
+\def\bfPi{\mbox{\boldmath $\Pi$}}
+\def\bfxi{\mbox{\boldmath $\xi$}}
+\def\bfepsilon{\mbox{\boldmath $\epsilon$}}
+\def\bfvarepsilon{\mbox{\boldmath $\varepsilon$}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+}
+
+\makeatother
+
+\usepackage{babel}
+
+
+
+\begin{document}
+
+\title{Test File for bibgen.nb}
+
+\author{Yu Jia\footnote{jiay@ihep.ac.cn}}
+\affiliation{Institute of High Energy Physics and Theoretical Physics Center for
+Science Facilities, Chinese Academy of
+Sciences, Beijing 100049, China\vspace{0.2cm}}
+\affiliation{Center
+for High Energy Physics, Peking University, Beijing 100871,
+China\vspace{0.2cm}}
+
+\author{Xiaonu Xiong\footnote{xiaonu.xiong@pv.infn.it}}
+
+\affiliation{Istituto Nazionale di Fisica Nucleare, Sezione di Pavia, Pavia, 27100,
+Italy}
+
+
+\date{\today}
+
+\begin{abstract}
+The recently-proposed quasi distributions point out a promising direction
+for lattice QCD to investigate the light-cone correlators,
+such as parton distribution functions (PDF) and distribution amplitudes (DA),
+directly in the $x$-space.
+Owing to its excessive simplicity,
+the heavy quarkonium can serve as an ideal theoretical laboratory to ascertain
+certain features of quasi-DA.
+In the framework of non-relativistic QCD (NRQCD) factorization, we compute the order-$\alpha_s$ correction to
+both light-cone distribution amplitudes (LCDA) and quasi-DA associated with the lowest-lying quarkonia,
+with the transverse momentum UV cutoff interpreted as the renormalization scale.
+We confirm analytically that the quasi-DA of a quarkonium does reduce to
+the respective LCDA in the infinite-momentum limit.
+We also observe that, provided that the momentum of a charmonium reaches about
+2-3 times its mass, the quasi-DAs already converge to the LCDAs to a decent level.
+These results might provide some useful guidance for the future
+lattice study of the quasi distributions.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pacs{\it 12.38.Bx, 12.38.Gc, 14.40.Pq}
+
+%11.10.Hi Renormalization group evolution of parameters
+%12.38.Bx Perturbative calculations
+%12.38.Cy Summation of perturbation theory
+%12.38.-t Quantum chromodynamics
+%12.39.St Factorization
+%13.20.Gd Decays of J/¦×, ¦´, and other quarkonia
+%13.60.Le Meson production
+%13.60.Hb Total and inclusive cross sections (including deep-inelastic processes)
+%13.87.Fh Fragmentation into hadrons
+%14.40.Pq Heavy quarkonia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maketitle
+
+\section{introduction}
+
+The QCD factorization theorems~\cite{Collins:1989gx} imply that the
+parton distribution functions (PDF)~\cite{Collins:1981uw} play the central role in accounting for virtually every
+high-energy collision experiment.
+In addition to PDF, there also exist other important types of light-cone correlators,
+such as generalized parton distributions (GPD), transverse momentum dependent distributions
+(TMDs), and light-cone distribution amplitudes (LCDA), all of which probe the internal structure of a hadron
+in terms of fundamental quark-gluon degree of freedom.
+
+These light-cone correlators are of nonperturbative nature, and are notoriously difficult to compute from
+the first principle of QCD. The eminent obstacle for the lattice simulation originates from the fact that
+they are defined in terms of the bilocal operators with light-like separation.
+In the past,
+lattice simulation has mainly focused on computing their
+moments~\cite{Alexandrou:2015qia,Hagler:2007xi,Musch:2011er,Braun:2015lfa},
+which are constructed out of the local operators.
+Unfortunately, it becomes quickly impractical to go beyond a first few moments, since the more derivatives added,
+the noisier the lattice simulation would become. To date,
+our comprehensive knowledge about the nucleon PDF is gleaned exclusively through extracting from the
+experimental data~\cite{Gao:2013xoa,Martin:2009iq,Ball:2014uwa}.
+
+An exciting breakthrough has emerged recently.
+A lattice calculation scheme directly in $x$-space was proposed by Ji in 2013~\cite{Ji:2013dva}.
+In this approach, the task of computing the original light-cone correlators is transformed into computing
+a new class of nonlocal matrix elements: the so-called {\it quasi} distributions.
+These quasi distributions are defined as equal-time yet spatially-nonlocal correlation functions, thus amenable to
+the lattice simulation.
+In contrast to the light-cone quantities, the quasi distributions are generally frame-dependent.
+But in the infinite momentum frame (IMF), the quasi distributions are expected to exactly recover the original
+light-cone distributions. Ji has further envisaged that,
+in analogy with the heavy quark effective theory (HQET), the quasi distribution method can be framed in an effective field theory context,
+dubbed {\it Large Momentum Effective field Theory} (LaMET)~\cite{Ji:2014gla}.
+The LaMET was first applied to proton spin structure,
+which provides a means to extract the nucleon spin contents from the quasi distributions calculated on lattice~\cite{Ji:2013fga,Ji:2014lra}.
+
+The utility of this new approach hinges crucially on the key that the quasi-distributions and
+light-cone distribution share the exactly same infrared (IR) properties. It implies there exists a factorization theorem that connects these two quantities,
+with perturbatively calculable matching coefficients.
+Once the lattice has measured the quasi distributions, one can use this factorization formula to reconstruct
+the desired light-cone quantities.
+
+During the past two years, the one-loop matching factors have been computed for PDFs, GPDs for the non-singlet quark,
+as well as pion DA~\cite{Xiong:2013bka,Ma:2014jla,Ji:2015qla}. The quasi TMD was also studied in \cite{Ji:2014hxa}.
+Very recently, the two-loop renormalization of quasi-PDF has also been conducted~\cite{Ji:2015jwa}.
+The factorization theorem for PDF has recently been proved to all orders in $\alpha_s$~\cite{Ma:2014jla}.
+In addition, there recently have emerged some preliminary results from exploratory lattice simulations, extracting
+the PDF from quasi PDF through the matching procedure outlined above~\cite{Lin:2014zya,Alexandrou:2015rja}.
+
+To turn the quasi-distributions into a fruitful industry,
+there remain many technical obstacles to overcome.
+One outstanding challenge is to systematically implement the renormalization of such nonlocal operators on lattice.
+Another difficulty stems from the technical limitation that, it is too expensive for the current lattice resources to
+accommodate a fast-moving hadron on the lattice, since it requires exquisitely fine lattice spacing.
+It is fair to say that, there is still a long way to go for the lattice simulation to be able to produce
+phenomenologically competitive results.
+
+For the lack of nonperturbative understanding of quasi distributions,
+it is worth looking at their features from the perspective of phenomenological models.
+For example, very recently the nucleon quasi-PDF has been investigated in a diquark model~\cite{Gamberg:2014zwa},
+and the authors have examined how fast the nucleon quasi-PDF would approach the PDF with the increasing nucleon momentum.
+
+Needless to say, it is also highly desirable to gain understanding about the gross features of the quasi distributions
+from a model-independent angle. This consideration has motivated us
+to study the distribution amplitudes (DA) of heavy quarkonia, chiefly because they offer
+a unique, clean platform to scrutinize the quasi distributions. The key reason is that the DA of quarkonium
+can be largely understood solely within perturbation theory.
+
+The widely-separated scales ($m\gg mv,\,\Lambda_{\rm QCD}$) inherent to quarkonium
+invites an effective-field-theory treatment.
+In fact, the influential non-relativistic QCD (NRQCD) factorization approach~\cite{Bodwin:1994jh},
+which fully exploits this scale hierarchy, nowadays has become an indispensable tool to tackle
+quarkonium-related phenomena.
+
+According to NRQCD factorization, the LCDA of a heavy quarkonium can be factorized as
+the sum of the product of perturbatively-calculable, IR-finite coefficient functions and nonperturbative local NRQCD matrix elements~\cite{Ma:2006hc,Bell:2008er,Wang:2013ywc}.
+At the lowest order in velocity expansion, up to a normalization factor,
+the profile of the quarkonium LCDA is fully amenable to perturbation theory.
+
+In this work, we generalize this knowledge and apply NRQCD factorization further to
+the quasi-DA of heavy quarkonia, and calculate the respective coefficient functions to order $\alpha_s$.
+To keep things as simple as possible, we concentrate on the lowest-lying $S$-wave quarkonia.
+We have verified that, like the LCDAs of quarkonium, the quasi-DAs at order $\alpha_s$ are also IR-finite.
+We are able to show analytically that, the quasi-DA exactly reduces to the LCDA in the infinity-momentum limit.
+We also observe that, provided that the quarkonium is boosted to carry a momentum about 2-3 times its mass,
+and with the renormalization scale chosen around the charmonium mass,
+the respective quasi-DAs will converge to the LCDAs to a satisfactory degree.
+
+We hope some of features about the quarkonium quasi-DAs may also apply to other hadrons.
+Hopefully this knowledge will provide some useful guidance to the future lattice investigation
+of similar quasi distributions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{NRQCD factorization of Quarkonium Distribution Amplitudes}
+\label{NRQCD:fac:LC:quasi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In contrast to the light hadrons, heavy quarkonia are arguably among the simplest hadrons:
+its constituent quark and antiquark are quite heavy, $m\gg \Lambda_{\rm QCD}$,
+and move rather slowly ($v\ll 1$). These two essential features result in the
+hierarchical structure of intrinsic energy scales of a quarkonium.
+NRQCD factorization approach~\cite{Bodwin:1994jh} fully exploits this scale hierarchy,
+and allows one to efficiently separate the relativistic/perturbative contributions from the long-distance/nonperturbative dynamics.
+For most quarkonium-related phenomena, {\it i.e.} quarknoium production and decay processes,
+this factorization approach has become an standard tool.
+
+It is well known that the fragmentation functions for a parton transitioning into a light hadron
+are genuinely nonperturbative
+objects, and the only way to extract them is through experimental measurements~\cite{Agashe:2014kda}.
+On the contrary, it was realized long ago that the heavy quarkonium fragmentation function can be
+put in a factorized form~\cite{Braaten:1993mp,Braaten:1993rw}.
+Concretely speaking, for a gluon-to-quarkonium fragmentation function, one has
+%--------------------------
+\begin{align}
+D_{g\to H+X}(z,\mu) &= \sum_n  d_{g\to c\bar{c}[n]}(z) \langle 0| O_H[n] |0\rangle,
+\end{align}
+%---------------------------
+where $z$ denotes the momentum fraction, and $n$ specifies the color/spin/orbital quantum number of the $c\bar{c}$ pair, and
+$O_H[n]$ is the NRQCD four-fermion operators, which characterizes the transition probability from the
+partonic state $c\bar{c}[n]$ to the quarkonium $H$ plus additional soft hadrons.
+The key insight is that coefficient functions $d_{g\to c\bar{c}[n]}(z)$ are perturbatively calculable.
+
+Analogous to the case of aforementioned fragmentation function,
+one might naturally envisage that the DA of a quarkonium is also not a fully nonpertubative object,
+and some sort of short-distance ($\sim 1/m$) effects should be disentangled owing to asymptotic freedom.
+Indeed, such an analogy has already been pursued some time ago~\cite{Ma:2006hc,Bell:2008er}.
+Schematically, one may express the quarkonium DA in the following factorized form:
+\begin{align}
+\Phi_{H}(x,\mu) \sim & \sum_{n} \langle H\left| \mathcal{O}_{[n]}\right|0\rangle
+\phi_{H[n]}(x,\mu),
+\label{eq:ReFact}
+\end{align}
+where the color-singlet NRQCD operators $\mathcal{O}_{[n]}$ are
+organized according to the importance in the velocity expansion. Apart from the universal NRQCD matrix elements,
+the key observation is that $\phi_{H[n]}\left(x,\mu\right)$ can now be interpreted as the short-disance coefficients.
+Actually, for the hard exclusive quarkonium production, employing this factorized quarkonium LCDA turns out to
+have considerable advantage compared with conventional NRQCD factorization approach~\cite{Jia:2008ep,Jia:2010fw}.
+
+For simplicity, in this work we will only concentrate on the distribution amplitudes of $S$-wave quarkonia. Moreover,
+we will only be interested in the lowest order in $v$ expansion.
+Obviously, there is no any principal difficulty to incorporate the relativistic corrections,
+or even extend to higher orbital quarkonium states.
+
+\subsection{NRQCD factorization of quarkonium LCDA}
+
+To be specific, let us assume the quarkonium $H$ to move along the positive $z$-axis,
+{\it i.e.}, $P^{\mu}=\left(\sqrt{P_z^2+m^{2}},\boldsymbol{0}_{\perp}, P^{z} \right)$ with $P^z>0$.
+For a general 4-vector $V^\mu$, it is convenient to introduce the light-cone plus (minus) components
+ $V^{\pm}={1\over \sqrt{2}}(V^{0}\pm V^{z})$.
+
+The leading-twist LCDAs of the pseudoscalar meson $P$, longitudinally (transversely) polarized vector meson $V^{\parallel,\perp}$,
+are defined as
+%---------------------------
+\begin{subequations}
+%---------------------------
+\begin{align}
+%---------------------------
+\Phi_{P}\left(x,\mu\right)= & -if_{P} P^{+} \phi_{P}\left(x,\mu\right)\nonumber \\
+%---------------------------
+= & \int\frac{d\xi^{-}}{2\pi}\,e^{-i\left(x-\frac{1}{2}\right) P^{+}\xi^{-}}\left\langle P\left(P\right)\!\left|\!\bar{\psi}\left(\frac{\xi^{-}}{2}\right)\gamma^{+}\gamma^{5}\mathcal{W}
+\psi\left(-\frac{\xi^{-}}{2}\right)\!\right|0\right\rangle ,\\
+%---------------------------
+\Phi_{V}^{\parallel}\left(x,\mu\right)= & -if_{V}^{\parallel}\varepsilon_{\parallel}^{*+} M_{V} \phi_{V}^{\parallel}\left(x,\mu\right)\nonumber \\
+%---------------------------
+= & \int\frac{d\xi^{-}}{2\pi}\,e^{-i\left(x-\frac{1}{2}\right) P^{+}\xi^{-}}\left\langle V\left(P,\varepsilon_\parallel\right)\!\left|\!\bar{\psi}\left(\frac{\xi^{-}}{2}\right)\gamma^{+}
+\mathcal{W} \psi\left(-\frac{\xi^{-}}{2}\right)\!\right|0\right\rangle ,\\
+%---------------------------
+\Phi_{V}^\perp\left(x,\mu\right)= & -i f_{V}^{\perp} P^{+} \phi_{V}^\perp \left(x,\mu\right)
+%---------------------------
+\nonumber \\
+%---------------------------
+= & \int\frac{d\xi^{-}}{2\pi}\,e^{-i\left(x-\frac{1}{2}\right)P^{+}\xi^{-}}\left\langle V\left(P,\varepsilon_\perp \right)\!\left|\!\bar{\psi}\left(\frac{\xi^{-}}{2}\right)\gamma^{+} \bfgamma \cdot \bfvarepsilon_{\perp}
+\mathcal{W} \psi\left(-\frac{\xi^{-}}{2}\right)\!\right|0\right\rangle,
+%---------------------------
+\end{align}
+\label{eq:LCDA_Def}
+\end{subequations}
+%---------------------------
+where $\varepsilon_{\parallel}^{\mu}$,
+$\epsilon_{\perp}^{\mu}$ are the polarization vector for longitudinally
+and transversely polarized vector meson, $\mu$ signifies the renormalization scale. $\mathcal{W}$ is the gauge
+link along the light-cone ``minus'' direction:
+%---------------------------
+\begin{align}
+%---------------------------
+\mathcal{W}  &= {\mathcal P} \exp\left[-i g_s
+\int^{\xi^{-}\over 2}_{-{\xi^{-}\over 2}}
+d \eta^- A^+(\eta^-)\right].
+%---------------------------
+\end{align}
+%---------------------------
+
+The decay constants $f_{H}$ are defined as the vacuum-to-quarkonium
+matrix elements mediated by various local QCD currents:
+%---------------------------
+\begin{subequations}
+\begin{align}
+\langle P (P) |\bar{\psi}\gamma^{+}\gamma^{5}\psi|0\rangle & \equiv  -i  f_{P} P^{+}= \int_{0}^{1}dx\,\Phi_{P}\left(x,\mu\right),\\
+%---------------------------
+\left\langle V(P,\varepsilon_{\parallel})\left|\bar{\psi} \gamma^{+}\psi \right|0\right\rangle & \equiv -i M_V
+f_V^{\parallel} \varepsilon_{\parallel}^{*+} = \int_{0}^{1}dx\,\Phi_{V}^{\parallel} \left(x,\mu\right),\\
+%---------------------------
+\left\langle V(P,\varepsilon_{\perp})\left| \bar{\psi} \gamma^+ \bfgamma_\perp \psi \right|0\right\rangle & \equiv
+-i f_{V}^\perp P^{+} \bfvarepsilon_{\perp}^{*}= \int_{0}^{1}dx\,\Phi_V^\perp(x,\mu).
+\end{align}
+\label{Def:decay:constant:LC}
+\end{subequations}
+
+The LCDA is clearly subject to the normalization condition:
+%--------------------------
+\begin{align}
+\int^1_0 \! dx\,\phi_H(x)=1 \qquad{\rm for} \;\;\forall\;\; H.
+\end{align}
+%---------------------------
+
+Thus far, everything is about the standard definition, valid for any pseudoscalar and vector mesons.
+So what is special about the heavy quarkonium? As has been argued previously, the quarkonium DA defined above
+still contains short-distance contribution, which ought to be identified and isolated.
+
+If $H$ is a $S$-wave quarkonium state, the precise implication of NRQCD factorization of the LCDA is
+%--------------------------------------------
+\begin{subequations}
+\begin{align}
+%--------------------------------------------
+\phi_H(x) &= \phi^{(0)}_H(x) + {C_F\alpha_s  \over \pi}\phi^{(1)}_H(x) +\cdots, \label{LCDA:pert:expansion} \\
+%--------------------------------------------
+f_{H} &= f_{H}^{(0)} \left(1+{C_F\alpha_s \over \pi}\,{\mathfrak f}_{H}^{(1)}+\cdots \right)+O(v^2), \label{Decay:constant:matching}
+%--------------------------------------------
+\end{align}
+\label{Precise:meaning:NRQCD;fac:LCDA}
+\end{subequations}
+%--------------------------------------------
+where $H= P, V_\parallel, V_\perp$. For the DAs of the hidden-flavor quakonia (the $c\bar{c}$ or $b\bar{b}$ family),
+charge conjugation symmetry demands that they are symmetric under $x\leftrightarrow 1-x$.
+
+The key message conveyed in (\ref{Precise:meaning:NRQCD;fac:LCDA}) is that the
+$\phi_H(x)$ entailing all the hard ``collinear'' degree of freedom
+(with typical virtuality of order $m^2$), thus can be computed in perturbation theory owing to asymptotic freedom.
+The nonperturbative aspects of quarkonium are encoded
+in the decay constant $f_H$.
+Moreover, as indicated in (\ref{Decay:constant:matching}), one can match the QCD currents to the respective NRQCD
+currents, by integrating out the hard quantum fluctuation. Consequently,
+the genuinely nonperturbative binding dynamics is
+encapsulated in the NRQCD matrix elements $f_{H}^{(0)}$.
+For $H=\eta_c,\,J/\psi$, one has
+%--------------------------------------------
+\begin{subequations}
+\begin{align}
+f_{\eta_c}^{(0)} &= {1\over \sqrt{m_c}} \langle \eta_c| \psi^\dagger \chi|0\rangle  \approx
+\sqrt{N_c\over 2\pi m_c} R_{\eta_c}(0), \\
+f_{J/\psi}^{\parallel(0)} &= f_{J/\psi}^{\perp (0)}= {1\over \sqrt{m_c}} \langle J/\psi(\bfvarepsilon)| \psi^\dagger\bfsigma\cdot
+\bfvarepsilon \chi|0\rangle \approx \sqrt{N_c\over 2\pi m_c} R_{J/\psi}(0),
+\end{align}
+\label{Def:NRQCD:vac:to:H:matrix:element}
+\end{subequations}
+%--------------------------------------------
+where $\bfvarepsilon$ denotes the polarization three-vector in the $J/\psi$ rest frame,
+and $N_c=3$ is the number of colors in QCD. Since NRQCD matrix elements are always defined in the quarkonium rest frame,
+rotation invariance then implies that $f_{J/\psi}^{\parallel(0)} = f_{J/\psi}^{\perp(0)}$.
+As implied in the last entity, these NRQCD matrix elements are often approximated by $R_H(0)$,
+the radial Schr\"{o}dinger wave function at the origin for the $S$-wave charmonia,
+which can be evaluated in the phenomenological quark potential models.
+
+
+
+%-------------------------------
+
+\begin{thebibliography}{99}
+
+
+%\cite{Alexandrou:2015qia}
+\bibitem{Alexandrou:2015qia}
+  C.~Alexandrou, M.~Constantinou, S.~Dinter, V.~Drach, K.~Hadjiyiannakou, K.~Jansen, G.~Koutsou and A.~Vaquero,
+  %``First moment of the flavour octet nucleon parton distribution function using lattice QCD,''
+  JHEP {\bf 1506}, 068 (2015)
+  [arXiv:1501.03734 [hep-lat]].
+  %%CITATION = ARXIV:1501.03734;%%
+
+
+%\cite{Collins:1989gx}
+\bibitem{Collins:1989gx}
+  J.~C.~Collins, D.~E.~Soper and G.~F.~Sterman,
+  %``Factorization of Hard Processes in QCD,''
+  Adv.\ Ser.\ Direct.\ High Energy Phys.\  {\bf 5}, 1 (1989)  [hep-ph/0409313].  %%CITATION = HEP-PH/0409313;%%  %586 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Collins:1981uw}
+\bibitem{Collins:1981uw}
+  J.~C.~Collins and D.~E.~Soper,
+  %``Parton Distribution and Decay Functions,''
+  Nucl.\ Phys.\ B {\bf 194}, 445 (1982).
+  %%CITATION = NUPHA,B194,445;%%
+  %749 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Hagler:2007xi}
+\bibitem{Hagler:2007xi}
+  P.~Hagler {\it et al.} [LHPC Collaboration],
+  %``Nucleon Generalized Parton Distributions from Full Lattice QCD,''
+  Phys.\ Rev.\ D {\bf 77}, 094502 (2008)
+  [arXiv:0705.4295 [hep-lat]].
+  %%CITATION = ARXIV:0705.4295;%%
+  %233 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Musch:2011er}
+\bibitem{Musch:2011er}
+  B.~U.~Musch, P.~Hagler, M.~Engelhardt, J.~W.~Negele and A.~Schafer,
+  %``Sivers and Boer-Mulders observables from lattice QCD,''
+  Phys.\ Rev.\ D {\bf 85}, 094510 (2012)
+  [arXiv:1111.4249 [hep-lat]].
+  %%CITATION = ARXIV:1111.4249;%%
+  %52 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Braun:2015lfa}
+\bibitem{Braun:2015lfa}
+  V.~M.~Braun, S.~Collins, M.~G?ckeler, P.~P¨¦rez-Rubio, A.~Sch?fer, R.~W.~Schiel and A.~Sternbeck,
+  %``Pion Distribution Amplitude from Lattice QCD,''
+  arXiv:1510.07429 [hep-lat].
+  %%CITATION = ARXIV:1510.07429;%%
+
+%\cite{Ma:2014jla}
+\bibitem{Ma:2014jla}
+Y.~-Q.~Ma and J.~-W.~Qiu,
+%``Extracting Parton Distribution Functions from Lattice QCD Calculations,''
+arXiv:1404.6860 [hep-ph].
+
+%\cite{Gao:2013xoa}
+\bibitem{Gao:2013xoa}
+  J.~Gao {\it et al.},
+  %``CT10 next-to-next-to-leading order global analysis of QCD,''
+  Phys.\ Rev.\ D {\bf 89}, no. 3, 033009 (2014)
+  [arXiv:1302.6246 [hep-ph]].
+  %%CITATION = ARXIV:1302.6246;%%
+  %257 citations counted in INSPIRE as of 12 Nov 2015
+
+
+%\cite{Martin:2009iq}
+\bibitem{Martin:2009iq}
+  A.~D.~Martin, W.~J.~Stirling, R.~S.~Thorne and G.~Watt,
+  %``Parton distributions for the LHC,''
+  Eur.\ Phys.\ J.\ C {\bf 63}, 189 (2009)
+  [arXiv:0901.0002 [hep-ph]].
+  %%CITATION = ARXIV:0901.0002;%%
+  %2955 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Ball:2014uwa}
+\bibitem{Ball:2014uwa}
+  R.~D.~Ball {\it et al.} [NNPDF Collaboration],
+  %``Parton distributions for the LHC Run II,''
+  JHEP {\bf 1504}, 040 (2015)
+  [arXiv:1410.8849 [hep-ph]].
+  %%CITATION = ARXIV:1410.8849;%%
+  %102 citations counted in INSPIRE as of 12 Nov 2015
+
+\bibitem{Ji:2013dva}
+X.~Ji,
+%``Parton Physics on Euclidean Lattice,''
+Phys.\ Rev.\ Lett.\  {\bf 110}, 262002 (2013) [arXiv:1305.1539 [hep-ph]].
+%%CITATION = ARXIV:1305.1539;%%   %2 citations counted in INSPIRE as of
+
+%\cite{Ji:2014gla}
+\bibitem{Ji:2014gla}
+  X.~Ji,
+  %``Parton Physics from Large-Momentum Effective Field Theory,''
+  Sci.\ China Phys.\ Mech.\ Astron.\  {\bf 57}, 1407 (2014)  [arXiv:1404.6680 [hep-ph]].
+  %%CITATION = ARXIV:1404.6680;%%  %13 citations counted in INSPIRE as of 10 Nov 2015
+
+
+%\cite{Ji:2013fga}
+\bibitem{Ji:2013fga}
+X.~Ji, J.~H.~Zhang and Y.~Zhao,
+%``Physics of the Gluon-Helicity Contribution to Proton Spin,''
+Phys.\ Rev.\ Lett.\  {\bf 111}, 112002 (2013) [arXiv:1304.6708 [hep-ph]].
+%%CITATION = ARXIV:1304.6708;%%
+%25 citations counted in INSPIRE as of 11 Nov 2015
+
+%\cite{Ji:2014lra}
+\bibitem{Ji:2014lra}
+X.~Ji, J.~H.~Zhang and Y.~Zhao,
+%``Justifying the Naive Partonic Sum Rule for Proton Spin,''
+Phys.\ Lett.\ B {\bf 743}, 180 (2015)
+[arXiv:1409.6329 [hep-ph]].
+%%CITATION = ARXIV:1409.6329;%%
+%11 citations counted in INSPIRE as of 11 Nov 2015
+
+%\cite{Xiong:2013bka}
+\bibitem{Xiong:2013bka}
+X.~Xiong, X.~Ji, J.~H.~Zhang and Y.~Zhao,
+%``One-loop matching for parton distributions: Nonsinglet case,''
+Phys.\ Rev.\ D {\bf 90}, no. 1, 014051 (2014)   [arXiv:1310.7471 [hep-ph]].
+%%CITATION = ARXIV:1310.7471;%%   %17 citations counted in INSPIRE as of 08 sept. 2015
+
+
+
+
+%\cite{Lin:2014zya}
+\bibitem{Lin:2014zya}
+H.~-W.~Lin, J.~-W.~Chen, S.~D.~Cohen and X.~Ji,
+%``Flavor Structure of the Nucleon Sea from Lattice QCD,''
+arXiv:1402.1462 [hep-ph].
+%%CITATION = ARXIV:1402.1462;%%   %2 citations counted in INSPIRE as of 07 May 2014
+
+%\cite{Ji:2015qla}
+\bibitem{Ji:2015qla}
+X.~Ji, A.~Schäfer, X.~Xiong and J.~H.~Zhang,
+%``One-Loop Matching for Generalized Parton Distributions,''
+Phys.\ Rev.\ D {\bf 92}, no. 1, 014039 (2015)   [arXiv:1506.00248 [hep-ph]].
+%%CITATION = ARXIV:1506.00248;%%
+
+%\cite{Ji:2014hxa}
+\bibitem{Ji:2014hxa}
+X.~Ji, P.~Sun, X.~Xiong and F.~Yuan,
+%``Soft Factor Subtraction and Transverse Momentum Dependent Parton Distributions on Lattice,''
+Phys.\ Rev.\ D {\bf 91}, 074009 (2015) [arXiv:1405.7640 [hep-ph]].
+%%CITATION = ARXIV:1405.7640;%%
+%13 citations counted in INSPIRE as of 09 Nov 2015
+
+%\cite{Ji:2015jwa}
+\bibitem{Ji:2015jwa}
+X.~Ji and J.~H.~Zhang,
+%``Renormalization of quasiparton distribution,''
+Phys.\ Rev.\ D {\bf 92}, 034006 (2015)   [arXiv:1505.07699 [hep-ph]].
+%%CITATION = ARXIV:1505.07699;%%   %2 citations counted in INSPIRE as of 06 Nov 2015
+
+
+
+
+%\cite{Gamberg:2014zwa}
+\bibitem{Gamberg:2014zwa}
+L.~Gamberg, Z.~B.~Kang, I.~Vitev and H.~Xing,
+%``Quasi-parton distribution functions: a study in the diquark spectator model,''
+Phys.\ Lett.\ B {\bf 743}, 112 (2015)   [arXiv:1412.3401 [hep-ph]].
+%%CITATION = ARXIV:1412.3401;%%   %1 citations counted in INSPIRE as of 08 sept. 2015
+
+%\cite{Alexandrou:2015rja}
+\bibitem{Alexandrou:2015rja}
+C.~Alexandrou, K.~Cichy, V.~Drach, E.~Garcia-Ramos, K.~Hadjiyiannakou, K.~Jansen, F.~Steffens and C.~Wiese,
+%``Lattice calculation of parton distributions,''
+Phys.\ Rev.\ D {\bf 92}, no. 1, 014502 (2015)   [arXiv:1504.07455 [hep-lat]].
+%%CITATION = ARXIV:1504.07455;%%   %1 citations counted in INSPIRE as of 08 sept. 2015
+
+
+
+%\cite{Bodwin:1994jh}
+\bibitem{Bodwin:1994jh}
+  G.~T.~Bodwin, E.~Braaten and G.~P.~Lepage,
+  %``Rigorous QCD analysis of inclusive annihilation and production of heavy quarkonium,''
+  Phys.\ Rev.\ D {\bf 51}, 1125 (1995)  [Phys.\ Rev.\ D {\bf 55}, 5853 (1997)]  [hep-ph/9407339].
+  %%CITATION = HEP-PH/9407339;%%  %1807 citations counted in INSPIRE as of 10 Nov 2015
+
+
+%\cite{Braaten:1993rw}
+\bibitem{Braaten:1993rw}
+  E.~Braaten and T.~C.~Yuan,
+  %``Gluon fragmentation into heavy quarkonium,''
+  Phys.\ Rev.\ Lett.\  {\bf 71}, 1673 (1993)  [hep-ph/9303205].
+  %%CITATION = HEP-PH/9303205;%%  %256 citations counted in INSPIRE as of 10 Nov 2015
+
+
+%\cite{Ma:2006hc}
+\bibitem{Ma:2006hc}
+  J.~P.~Ma and Z.~G.~Si,
+  %``NRQCD Factorization for Twist-2 Light-Cone Wave-Functions of Charmonia,''
+  Phys.\ Lett.\ B {\bf 647}, 419 (2007)  [hep-ph/0608221].
+  %%CITATION = HEP-PH/0608221;%%  %33 citations counted in INSPIRE as of 10 Nov 2015
+
+%\cite{Bell:2008er}
+\bibitem{Bell:2008er}
+G.~Bell and T.~Feldmann,
+%``Modelling light-cone distribution amplitudes from non-relativistic bound states,''
+JHEP {\bf 0804}, 061 (2008)   [arXiv:0802.2221 [hep-ph]].
+%%CITATION = ARXIV:0802.2221;%%   %47 citations counted in INSPIRE as of 14 Oct 2015
+
+%\cite{Wang:2013ywc}
+\bibitem{Wang:2013ywc}
+X.~P.~Wang and D.~Yang,
+%``The leading twist light-cone distribution amplitudes for the S-wave and P-wave quarkonia and their applications in single quarkonium exclusive productions,''
+JHEP {\bf 1406}, 121 (2014)   [arXiv:1401.0122 [hep-ph]].
+%%CITATION = ARXIV:1401.0122;%%   %5 citations counted in INSPIRE as of 05 sept. 2015
+
+%\cite{Agashe:2014kda}
+\bibitem{Agashe:2014kda}
+  K.~A.~Olive {\it et al.} [Particle Data Group Collaboration],
+  %``Review of Particle Physics,''
+  Chin.\ Phys.\ C {\bf 38}, 090001 (2014).
+  %%CITATION = CHPHD,C38,090001;%%
+  %2276 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Braguta:2007fh}
+%\bibitem{Braguta:2007fh}
+%V.~V.~Braguta,   %``The study of leading twist light cone wave functions of J/psi meson,''
+%Phys.\ Rev.\ D {\bf 75}, 094016 (2007)   [hep-ph/0701234 [HEP-PH]].
+%%CITATION = HEP-PH/0701234;%%   %32 citations counted in INSPIRE as of 05 sept. 2015
+
+
+
+%\cite{Braaten:1993mp}
+\bibitem{Braaten:1993mp}
+  E.~Braaten, K.~m.~Cheung and T.~C.~Yuan,
+  %``Z0 decay into charmonium via charm quark fragmentation,''
+  Phys.\ Rev.\ D {\bf 48}, 4230 (1993)  [hep-ph/9302307].
+  %%CITATION = HEP-PH/9302307;%%  %205 citations counted in INSPIRE as of 10 Nov 2015
+
+
+
+ %\cite{Jia:2010fw}
+\bibitem{Jia:2010fw}
+  Y.~Jia, J.~X.~Wang and D.~Yang,
+  %``Bridging light-cone and NRQCD approaches: asymptotic behavior of $B_c$ electromagnetic form factor,''
+  JHEP {\bf 1110}, 105 (2011)  [arXiv:1012.6007 [hep-ph]].  %%CITATION = ARXIV:1012.6007;%%  %12 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Jia:2008ep}
+\bibitem{Jia:2008ep}
+  Y.~Jia and D.~Yang,
+  %``Refactorizing NRQCD short-distance coefficients in exclusive quarkonium production,''
+  Nucl.\ Phys.\ B {\bf 814}, 217 (2009)  [arXiv:0812.1965 [hep-ph]].  %%CITATION = ARXIV:0812.1965;%%  %16 citations counted in INSPIRE as of 12 Nov 2015
+
+
+%\cite{Braaten:1996jt}
+\bibitem{Braaten:1996jt}
+E.~Braaten and Y.~Q.~Chen,
+%``Helicity decomposition for inclusive J / psi production,''
+Phys.\ Rev.\ D {\bf 54}, 3216 (1996)   [hep-ph/9604237].
+%%CITATION = HEP-PH/9604237;%%   %110 citations counted in INSPIRE as of 28 Oct 2015
+
+
+%\cite{Beneke:1997zp}
+\bibitem{Beneke:1997zp}
+  M.~Beneke and V.~A.~Smirnov,
+  %``Asymptotic expansion of Feynman integrals near threshold,''
+  Nucl.\ Phys.\ B {\bf 522}, 321 (1998)  [hep-ph/9711391].
+  %%CITATION = HEP-PH/9711391;%%  %381 citations counted in INSPIRE as of 10 Nov 2015
+
+%\cite{Braguta:2006wr}
+\bibitem{Braguta:2006wr}
+  V.~V.~Braguta, A.~K.~Likhoded and A.~V.~Luchinsky,
+  %``The Study of leading twist light cone wave function of eta(c) meson,''
+  Phys.\ Lett.\ B {\bf 646}, 80 (2007)
+  [hep-ph/0611021].
+  %%CITATION = HEP-PH/0611021;%%
+  %42 citations counted in INSPIRE as of 12 Nov 2015
+
+
+%\cite{Czarnecki:1997vz}
+\bibitem{Czarnecki:1997vz}
+  A.~Czarnecki and K.~Melnikov,
+  %``Two loop QCD corrections to the heavy quark pair production cross-section in e+ e- annihilation near the threshold,''
+  Phys.\ Rev.\ Lett.\  {\bf 80} (1998) 2531
+  [hep-ph/9712222].
+  %%CITATION = HEP-PH/9712222;%%
+  %169 citations counted in INSPIRE as of 11 Apr 2015
+
+
+%\cite{Beneke:1997jm}
+\bibitem{Beneke:1997jm}
+  M.~Beneke, A.~Signer and V.~A.~Smirnov,
+  %``Two loop correction to the leptonic decay of quarkonium,''
+  Phys.\ Rev.\ Lett.\  {\bf 80} (1998) 2535
+  [hep-ph/9712302].
+  %%CITATION = HEP-PH/9712302;%%
+  %155 citations counted in INSPIRE as of 11 Apr 2015
+
+
+%\cite{Czarnecki:2001zc}
+\bibitem{Czarnecki:2001zc}
+  A.~Czarnecki and K.~Melnikov,
+  %``Charmonium decays: J / psi ---> e+ e- and eta(c) ---> gamma gamma,''
+  Phys.\ Lett.\ B {\bf 519} (2001) 212
+  [hep-ph/0109054].
+  %%CITATION = HEP-PH/0109054;%%
+  %31 citations counted in INSPIRE as of 11 Apr 2015
+
+%\cite{Brodsky:1989pv}
+\bibitem{Brodsky:1989pv}
+  S.~J.~Brodsky and G.~P.~Lepage,
+  %``Exclusive Processes in Quantum Chromodynamics,''
+  Adv.\ Ser.\ Direct.\ High Energy Phys.\  {\bf 5}, 93 (1989).
+  %%CITATION = 00319,5,93;%%
+  %68 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Lepage:1979zb}
+\bibitem{Lepage:1979zb}
+  G.~P.~Lepage and S.~J.~Brodsky,
+  %``Exclusive Processes in Quantum Chromodynamics: Evolution Equations for Hadronic Wave Functions and the Form-Factors of Mesons,''
+  Phys.\ Lett.\ B {\bf 87}, 359 (1979).
+  %%CITATION = PHLTA,B87,359;%%
+  %1113 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Efremov:1979qk}
+\bibitem{Efremov:1979qk}
+  A.~V.~Efremov and A.~V.~Radyushkin,
+  %``Factorization and Asymptotical Behavior of Pion Form-Factor in QCD,''
+  Phys.\ Lett.\ B {\bf 94}, 245 (1980).
+  %%CITATION = PHLTA,B94,245;%%
+  %927 citations counted in INSPIRE as of 12 Nov 2015
+
+ %\cite{Ma:2013yla}
+\bibitem{Ma:2013yla}
+  Y.~Q.~Ma, J.~W.~Qiu and H.~Zhang,
+  %``Heavy quarkonium fragmentation functions from a heavy quark pair. I. $S$ wave,''
+  Phys.\ Rev.\ D {\bf 89}, no. 9, 094029 (2014)
+  [arXiv:1311.7078 [hep-ph]].
+  %%CITATION = ARXIV:1311.7078;%%
+  %25 citations counted in INSPIRE as of 12 Nov 2015
+
+%\cite{Lepage:1980fj}
+\bibitem{Lepage:1980fj}
+  G.~P.~Lepage and S.~J.~Brodsky,
+  %``Exclusive Processes in Perturbative Quantum Chromodynamics,''
+  Phys.\ Rev.\ D {\bf 22}, 2157 (1980).
+  %%CITATION = PHRVA,D22,2157;%%
+  %2976 citations counted in INSPIRE as of 12 Nov 2015
+
+
+%\bibitem{Braguta:2007fh}
+%  V.~V.~Braguta,
+%  %``The study of leading twist light cone wave functions of J/psi meson,''
+%  Phys.\ Rev.\ D {\bf 75}, 094016 (2007)
+%  [hep-ph/0701234 [HEP-PH]].
+%  %%CITATION = HEP-PH/0701234;%%
+%  %32 citations counted in INSPIRE as of 12 Nov 2015
+
+
+
+
+\end{thebibliography}
+\end{document}
+
+

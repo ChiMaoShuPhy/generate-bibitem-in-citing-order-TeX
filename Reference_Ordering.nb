@@ -1,0 +1,481 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23806,        472]
+NotebookOptionsPosition[     23149,        446]
+NotebookOutlinePosition[     23524,        462]
+CellTagsIndexPosition[     23481,        459]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Str", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{"\"\<Quasi-Nov-15.tex\>\"", ",", "\"\<Text\>\""}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6563699974175863`*^9, 3.656370044182295*^9}, {
+  3.6563700989439893`*^9, 3.656370133918392*^9}, {3.6564234216277447`*^9, 
+  3.656423422199153*^9}, {3.6566824846549177`*^9, 3.6566825370556583`*^9}, {
+  3.656683215244855*^9, 3.656683225252921*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CiteOrder", "[", "Str_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "pos", ",", "Strp", ",", "Strq", ",", "Str1", ",", "Str2", ",", "YPat", 
+      ",", "i"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"Strp", "=", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"Str", ",", 
+        RowBox[{"Shortest", "[", 
+         RowBox[{
+         "\"\<\\\\begin{thebibliography}{\>\"", "~~", "__", "~~", 
+          "\"\<}\>\""}], "]"}]}], "]"}]}], ";", 
+     RowBox[{"Strq", "=", 
+      RowBox[{
+      "Strp", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], ";", 
+     RowBox[{"pos", "=", 
+      RowBox[{"StringPosition", "[", 
+       RowBox[{"Strq", ",", 
+        RowBox[{"Shortest", "[", 
+         RowBox[{"\"\<\\\\cite{\>\"", "~~", "__", "~~", "\"\<}\>\""}], 
+         "]"}]}], "]"}]}], ";", 
+     RowBox[{"Str1", "=", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{
+        RowBox[{"DeleteDuplicates", "[", 
+         RowBox[{"StringTake", "[", 
+          RowBox[{"Strq", ",", "pos"}], "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"\"\<\\\\cite{\>\"", "~~", "YPat__", "~~", "\"\<}\>\""}], 
+         "\[Rule]", "YPat"}]}], "]"}]}], ";", 
+     RowBox[{"Str2", "=", 
+      RowBox[{"DeleteDuplicates", "[", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"StringSplit", "[", 
+          RowBox[{"Str1", ",", "\"\<,\>\""}], "]"}], ",", "1"}], "]"}], 
+       "]"}]}], ";", 
+     RowBox[{"Column", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"DynamicModule", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"col", "=", "Black"}], "}"}], ",", 
+           RowBox[{"EventHandler", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"\"\<[\>\"", "<>", 
+                RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<] \>\"", "<>", 
+                RowBox[{
+                "Str2", "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}]}], ",", 
+               RowBox[{"FontColor", "\[Rule]", 
+                RowBox[{"Dynamic", "[", "col", "]"}]}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"\"\<MouseClicked\>\"", "\[RuleDelayed]", 
+               RowBox[{"(", 
+                RowBox[{"col", "=", 
+                 RowBox[{"col", "/.", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Red", "\[Rule]", "Black"}], ",", 
+                    RowBox[{"Black", "\[Rule]", "Red"}]}], "}"}]}]}], ")"}]}],
+               "}"}]}], "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "Str2", "]"}]}], "}"}]}], "]"}], ",", 
+       RowBox[{"Alignment", "\[Rule]", "\"\<[\>\""}]}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.656372467687941*^9, 3.6563724971873713`*^9}, {
+   3.656372541984393*^9, 3.656372563493999*^9}, 3.6563740673127747`*^9, 
+   3.6564110394797373`*^9, 3.656411293844873*^9, {3.6564224468385305`*^9, 
+   3.6564224811957006`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CiteOrder", "[", "Str", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6564223829928727`*^9, 3.6564223841466846`*^9}, 
+   3.656683229248041*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CiteOrder1", "[", "Str_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "pos", ",", "Strp", ",", "Strq", ",", "Str1", ",", "YPat", ",", "i"}], 
+     "}"}], ",", 
+    RowBox[{
+     RowBox[{"Strp", "=", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"Str", ",", 
+        RowBox[{"Shortest", "[", 
+         RowBox[{
+         "\"\<\\\\begin{thebibliography}{\>\"", "~~", "__", "~~", 
+          "\"\<}\>\""}], "]"}]}], "]"}]}], ";", 
+     RowBox[{"Strq", "=", 
+      RowBox[{
+      "Strp", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], ";", 
+     RowBox[{"pos", "=", 
+      RowBox[{"StringPosition", "[", 
+       RowBox[{"Strq", ",", 
+        RowBox[{"Shortest", "[", 
+         RowBox[{"\"\<\\\\cite{\>\"", "~~", "__", "~~", "\"\<}\>\""}], 
+         "]"}]}], "]"}]}], ";", 
+     RowBox[{"Str1", "=", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{
+        RowBox[{"DeleteDuplicates", "[", 
+         RowBox[{"StringTake", "[", 
+          RowBox[{"Strq", ",", "pos"}], "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"\"\<\\\\cite{\>\"", "~~", "YPat__", "~~", "\"\<}\>\""}], 
+         "\[Rule]", "YPat"}]}], "]"}]}], ";", 
+     RowBox[{"DeleteDuplicates", "[", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{
+        RowBox[{"StringSplit", "[", 
+         RowBox[{"Str1", ",", "\"\<,\>\""}], "]"}], ",", "1"}], "]"}], 
+      "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.656411920715009*^9, {3.6564119868511505`*^9, 3.6564119947246733`*^9}, {
+   3.656422508461972*^9, 3.656422532767413*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BibGen", "[", "Str_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"Strp", ",", "Strq", ",", "StrOrd", ",", "Strt"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"Strp", "=", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"Str", ",", 
+        RowBox[{"Shortest", "[", 
+         RowBox[{
+         "\"\<\\\\begin{thebibliography}{\>\"", "~~", "__", "~~", 
+          "\"\<}\>\""}], "]"}]}], "]"}]}], ";", 
+     RowBox[{"StrOrd", "=", 
+      RowBox[{"CiteOrder1", "[", 
+       RowBox[{"Strp", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}],
+        "]"}]}], ";", 
+     RowBox[{"Strt", "=", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\"\<%\\\\cite\>\"", "<>", 
+            RowBox[{"Select", "[", 
+             RowBox[{
+              RowBox[{"StringTrim", "[", 
+               RowBox[{"StringSplit", "[", 
+                RowBox[{
+                 RowBox[{
+                 "Strp", "\[LeftDoubleBracket]", "2", 
+                  "\[RightDoubleBracket]"}], ",", "\"\<%\\\\cite\>\""}], 
+                "]"}], "]"}], ",", 
+              RowBox[{"StringContainsQ", "[", "#", "]"}]}], "]"}]}], "&"}], "/@",
+           "StrOrd"}], ")"}], ",", "1"}], "]"}]}], ";", 
+     RowBox[{
+      RowBox[{"StringJoin", "@@", 
+       RowBox[{"Riffle", "[", 
+        RowBox[{"Strt", ",", "\"\<\n\n\>\""}], "]"}]}], "//", 
+      "StandardForm"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.656411055625353*^9, 3.656411272885197*^9}, {
+   3.656411304007929*^9, 3.6564113273356934`*^9}, {3.656411428844041*^9, 
+   3.656411435704483*^9}, 3.656412012045706*^9, {3.6564221415909452`*^9, 
+   3.656422182562874*^9}, {3.656422739826024*^9, 3.6564227427691145`*^9}, {
+   3.65642277960818*^9, 3.6564228797816005`*^9}, {3.6564229867901163`*^9, 
+   3.6564230784125195`*^9}, {3.6564234540551534`*^9, 3.656423455993537*^9}, {
+   3.656423570052882*^9, 3.656423571916207*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BibGen", "[", "Str", "]"}]], "Input",
+ CellChangeTimes->{{3.6564230585176167`*^9, 3.6564231199498367`*^9}, {
+  3.6564234745527196`*^9, 3.6564234748344193`*^9}}],
+
+Cell[BoxData["\<\"%\\\\cite{Collins:1989gx}\\n\\\\bibitem{Collins:1989gx}\\n  \
+J.~C.~Collins, D.~E.~Soper and G.~F.~Sterman,\\n  %``Factorization of Hard \
+Processes in QCD,''\\n  Adv.\\\\ Ser.\\\\ Direct.\\\\ High Energy Phys.\\\\  \
+{\\\\bf 5}, 1 (1989)  [hep-ph/0409313].  %%CITATION = HEP-PH/0409313;%%  %586 \
+citations counted in INSPIRE as of 12 Nov 2015\\n\\n%\\\\cite{Collins:1981uw}\
+\\n\\\\bibitem{Collins:1981uw}\\n  J.~C.~Collins and D.~E.~Soper,\\n  \
+%``Parton Distribution and Decay Functions,''\\n  Nucl.\\\\ Phys.\\\\ B \
+{\\\\bf 194}, 445 (1982).\\n  %%CITATION = NUPHA,B194,445;%%\\n  %749 \
+citations counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Alexandrou:2015qia}\\n\\\\bibitem{Alexandrou:2015qia}\\n  \
+C.~Alexandrou, M.~Constantinou, S.~Dinter, V.~Drach, K.~Hadjiyiannakou, \
+K.~Jansen, G.~Koutsou and A.~Vaquero,\\n  %``First moment of the flavour \
+octet nucleon parton distribution function using lattice QCD,''\\n  JHEP \
+{\\\\bf 1506}, 068 (2015)\\n  [arXiv:1501.03734 [hep-lat]].\\n  %%CITATION = \
+ARXIV:1501.03734;%%\\n\\n%\\\\cite{Hagler:2007xi}\\n\\\\bibitem{Hagler:2007xi}\
+\\n  P.~Hagler {\\\\it et al.} [LHPC Collaboration],\\n  %``Nucleon \
+Generalized Parton Distributions from Full Lattice QCD,''\\n  Phys.\\\\ \
+Rev.\\\\ D {\\\\bf 77}, 094502 (2008)\\n  [arXiv:0705.4295 [hep-lat]].\\n  \
+%%CITATION = ARXIV:0705.4295;%%\\n  %233 citations counted in INSPIRE as of \
+12 Nov 2015\\n\\n%\\\\cite{Musch:2011er}\\n\\\\bibitem{Musch:2011er}\\n  \
+B.~U.~Musch, P.~Hagler, M.~Engelhardt, J.~W.~Negele and A.~Schafer,\\n  \
+%``Sivers and Boer-Mulders observables from lattice QCD,''\\n  Phys.\\\\ Rev.\
+\\\\ D {\\\\bf 85}, 094510 (2012)\\n  [arXiv:1111.4249 [hep-lat]].\\n  \
+%%CITATION = ARXIV:1111.4249;%%\\n  %52 citations counted in INSPIRE as of 12 \
+Nov 2015\\n\\n%\\\\cite{Braun:2015lfa}\\n\\\\bibitem{Braun:2015lfa}\\n  \
+V.~M.~Braun, S.~Collins, M.~G?ckeler, P.~P\[DoubleDot]\.a6rez-Rubio, \
+A.~Sch?fer, R.~W.~Schiel and A.~Sternbeck,\\n  %``Pion Distribution Amplitude \
+from Lattice QCD,''\\n  arXiv:1510.07429 [hep-lat].\\n  %%CITATION = \
+ARXIV:1510.07429;%%\\n\\n%\\\\cite{Gao:2013xoa}\\n\\\\bibitem{Gao:2013xoa}\\n \
+ J.~Gao {\\\\it et al.},\\n  %``CT10 next-to-next-to-leading order global \
+analysis of QCD,''\\n  Phys.\\\\ Rev.\\\\ D {\\\\bf 89}, no. 3, 033009 (2014)\
+\\n  [arXiv:1302.6246 [hep-ph]].\\n  %%CITATION = ARXIV:1302.6246;%%\\n  %257 \
+citations counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Martin:2009iq}\\n\\\\bibitem{Martin:2009iq}\\n  \
+A.~D.~Martin, W.~J.~Stirling, R.~S.~Thorne and G.~Watt,\\n  %``Parton \
+distributions for the LHC,''\\n  Eur.\\\\ Phys.\\\\ J.\\\\ C {\\\\bf 63}, 189 \
+(2009)\\n  [arXiv:0901.0002 [hep-ph]].\\n  %%CITATION = ARXIV:0901.0002;%%\\n \
+ %2955 citations counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Ball:2014uwa}\\n\\\\bibitem{Ball:2014uwa}\\n  R.~D.~Ball \
+{\\\\it et al.} [NNPDF Collaboration],\\n  %``Parton distributions for the \
+LHC Run II,''\\n  JHEP {\\\\bf 1504}, 040 (2015)\\n  [arXiv:1410.8849 \
+[hep-ph]].\\n  %%CITATION = ARXIV:1410.8849;%%\\n  %102 citations counted in \
+INSPIRE as of 12 Nov 2015\\n\\n\\\\bibitem{Ji:2013dva}\\nX.~Ji,\\n%``Parton \
+Physics on Euclidean Lattice,''\\nPhys.\\\\ Rev.\\\\ Lett.\\\\  {\\\\bf 110}, \
+262002 (2013) [arXiv:1305.1539 [hep-ph]].\\n%%CITATION = ARXIV:1305.1539;%%   \
+%2 citations counted in INSPIRE as \
+of\\n\\n%\\\\cite{Ball:2014uwa}\\n\\\\bibitem{Ball:2014uwa}\\n  R.~D.~Ball \
+{\\\\it et al.} [NNPDF Collaboration],\\n  %``Parton distributions for the \
+LHC Run II,''\\n  JHEP {\\\\bf 1504}, 040 (2015)\\n  [arXiv:1410.8849 \
+[hep-ph]].\\n  %%CITATION = ARXIV:1410.8849;%%\\n  %102 citations counted in \
+INSPIRE as of 12 Nov 2015\\n\\n\\\\bibitem{Ji:2013dva}\\nX.~Ji,\\n%``Parton \
+Physics on Euclidean Lattice,''\\nPhys.\\\\ Rev.\\\\ Lett.\\\\  {\\\\bf 110}, \
+262002 (2013) [arXiv:1305.1539 [hep-ph]].\\n%%CITATION = ARXIV:1305.1539;%%   \
+%2 citations counted in INSPIRE as \
+of\\n\\n%\\\\cite{Ji:2014gla}\\n\\\\bibitem{Ji:2014gla}\\n  X.~Ji,\\n  \
+%``Parton Physics from Large-Momentum Effective Field Theory,''\\n  Sci.\\\\ \
+China Phys.\\\\ Mech.\\\\ Astron.\\\\  {\\\\bf 57}, 1407 (2014)  \
+[arXiv:1404.6680 [hep-ph]].\\n  %%CITATION = ARXIV:1404.6680;%%  %13 \
+citations counted in INSPIRE as of 10 Nov \
+2015\\n\\n%\\\\cite{Ji:2013fga}\\n\\\\bibitem{Ji:2013fga}\\nX.~Ji, \
+J.~H.~Zhang and Y.~Zhao,\\n%``Physics of the Gluon-Helicity Contribution to \
+Proton Spin,''\\nPhys.\\\\ Rev.\\\\ Lett.\\\\  {\\\\bf 111}, 112002 (2013) \
+[arXiv:1304.6708 [hep-ph]].\\n%%CITATION = ARXIV:1304.6708;%%\\n%25 citations \
+counted in INSPIRE as of 11 Nov \
+2015\\n\\n%\\\\cite{Ji:2014lra}\\n\\\\bibitem{Ji:2014lra}\\nX.~Ji, \
+J.~H.~Zhang and Y.~Zhao,\\n%``Justifying the Naive Partonic Sum Rule for \
+Proton Spin,''\\nPhys.\\\\ Lett.\\\\ B {\\\\bf 743}, 180 \
+(2015)\\n[arXiv:1409.6329 [hep-ph]].\\n%%CITATION = ARXIV:1409.6329;%%\\n%11 \
+citations counted in INSPIRE as of 11 Nov \
+2015\\n\\n%\\\\cite{Xiong:2013bka}\\n\\\\bibitem{Xiong:2013bka}\\nX.~Xiong, \
+X.~Ji, J.~H.~Zhang and Y.~Zhao,\\n%``One-loop matching for parton \
+distributions: Nonsinglet case,''\\nPhys.\\\\ Rev.\\\\ D {\\\\bf 90}, no. 1, \
+014051 (2014)   [arXiv:1310.7471 [hep-ph]].\\n%%CITATION = ARXIV:1310.7471;%% \
+  %17 citations counted in INSPIRE as of 08 sept. \
+2015\\n\\n%\\\\cite{Ma:2014jla}\\n\\\\bibitem{Ma:2014jla}\\nY.~-Q.~Ma and \
+J.~-W.~Qiu,\\n%``Extracting Parton Distribution Functions from Lattice QCD \
+Calculations,''\\narXiv:1404.6860 \
+[hep-ph].\\n\\n%\\\\cite{Ji:2015qla}\\n\\\\bibitem{Ji:2015qla}\\nX.~Ji, \
+A.~Sch\[ADoubleDot]fer, X.~Xiong and J.~H.~Zhang,\\n%``One-Loop Matching for \
+Generalized Parton Distributions,''\\nPhys.\\\\ Rev.\\\\ D {\\\\bf 92}, no. \
+1, 014039 (2015)   [arXiv:1506.00248 [hep-ph]].\\n%%CITATION = \
+ARXIV:1506.00248;%%\\n\\n%\\\\cite{Ji:2014hxa}\\n\\\\bibitem{Ji:2014hxa}\\nX.~\
+Ji, P.~Sun, X.~Xiong and F.~Yuan,\\n%``Soft Factor Subtraction and Transverse \
+Momentum Dependent Parton Distributions on Lattice,''\\nPhys.\\\\ Rev.\\\\ D \
+{\\\\bf 91}, 074009 (2015) [arXiv:1405.7640 [hep-ph]].\\n%%CITATION = \
+ARXIV:1405.7640;%%\\n%13 citations counted in INSPIRE as of 09 Nov \
+2015\\n\\n%\\\\cite{Ji:2015jwa}\\n\\\\bibitem{Ji:2015jwa}\\nX.~Ji and \
+J.~H.~Zhang,\\n%``Renormalization of quasiparton distribution,''\\nPhys.\\\\ \
+Rev.\\\\ D {\\\\bf 92}, 034006 (2015)   [arXiv:1505.07699 \
+[hep-ph]].\\n%%CITATION = ARXIV:1505.07699;%%   %2 citations counted in \
+INSPIRE as of 06 Nov \
+2015\\n\\n%\\\\cite{Lin:2014zya}\\n\\\\bibitem{Lin:2014zya}\\nH.~-W.~Lin, \
+J.~-W.~Chen, S.~D.~Cohen and X.~Ji,\\n%``Flavor Structure of the Nucleon Sea \
+from Lattice QCD,''\\narXiv:1402.1462 [hep-ph].\\n%%CITATION = \
+ARXIV:1402.1462;%%   %2 citations counted in INSPIRE as of 07 May 2014\\n\\n%\
+\\\\cite{Alexandrou:2015rja}\\n\\\\bibitem{Alexandrou:2015rja}\\nC.~\
+Alexandrou, K.~Cichy, V.~Drach, E.~Garcia-Ramos, K.~Hadjiyiannakou, \
+K.~Jansen, F.~Steffens and C.~Wiese,\\n%``Lattice calculation of parton \
+distributions,''\\nPhys.\\\\ Rev.\\\\ D {\\\\bf 92}, no. 1, 014502 (2015)   \
+[arXiv:1504.07455 [hep-lat]].\\n%%CITATION = ARXIV:1504.07455;%%   %1 \
+citations counted in INSPIRE as of 08 sept. \
+2015\\n\\n%\\\\cite{Gamberg:2014zwa}\\n\\\\bibitem{Gamberg:2014zwa}\\nL.~\
+Gamberg, Z.~B.~Kang, I.~Vitev and H.~Xing,\\n%``Quasi-parton distribution \
+functions: a study in the diquark spectator model,''\\nPhys.\\\\ Lett.\\\\ B \
+{\\\\bf 743}, 112 (2015)   [arXiv:1412.3401 [hep-ph]].\\n%%CITATION = \
+ARXIV:1412.3401;%%   %1 citations counted in INSPIRE as of 08 sept. \
+2015\\n\\n%\\\\cite{Bodwin:1994jh}\\n\\\\bibitem{Bodwin:1994jh}\\n  \
+G.~T.~Bodwin, E.~Braaten and G.~P.~Lepage,\\n  %``Rigorous QCD analysis of \
+inclusive annihilation and production of heavy quarkonium,''\\n  Phys.\\\\ \
+Rev.\\\\ D {\\\\bf 51}, 1125 (1995)  [Phys.\\\\ Rev.\\\\ D {\\\\bf 55}, 5853 \
+(1997)]  [hep-ph/9407339].\\n  %%CITATION = HEP-PH/9407339;%%  %1807 \
+citations counted in INSPIRE as of 10 Nov 2015\\n\\n%\\\\cite{Ma:2006hc}\\n\\\
+\\bibitem{Ma:2006hc}\\n  J.~P.~Ma and Z.~G.~Si,\\n  %``NRQCD Factorization \
+for Twist-2 Light-Cone Wave-Functions of Charmonia,''\\n  Phys.\\\\ Lett.\\\\ \
+B {\\\\bf 647}, 419 (2007)  [hep-ph/0608221].\\n  %%CITATION = \
+HEP-PH/0608221;%%  %33 citations counted in INSPIRE as of 10 Nov \
+2015\\n\\n%\\\\cite{Bell:2008er}\\n\\\\bibitem{Bell:2008er}\\nG.~Bell and \
+T.~Feldmann,\\n%``Modelling light-cone distribution amplitudes from \
+non-relativistic bound states,''\\nJHEP {\\\\bf 0804}, 061 (2008)   \
+[arXiv:0802.2221 [hep-ph]].\\n%%CITATION = ARXIV:0802.2221;%%   %47 citations \
+counted in INSPIRE as of 14 Oct \
+2015\\n\\n%\\\\cite{Wang:2013ywc}\\n\\\\bibitem{Wang:2013ywc}\\nX.~P.~Wang \
+and D.~Yang,\\n%``The leading twist light-cone distribution amplitudes for \
+the S-wave and P-wave quarkonia and their applications in single quarkonium \
+exclusive productions,''\\nJHEP {\\\\bf 1406}, 121 (2014)   [arXiv:1401.0122 \
+[hep-ph]].\\n%%CITATION = ARXIV:1401.0122;%%   %5 citations counted in \
+INSPIRE as of 05 sept. \
+2015\\n\\n%\\\\cite{Agashe:2014kda}\\n\\\\bibitem{Agashe:2014kda}\\n  \
+K.~A.~Olive {\\\\it et al.} [Particle Data Group Collaboration],\\n  \
+%``Review of Particle Physics,''\\n  Chin.\\\\ Phys.\\\\ C {\\\\bf 38}, \
+090001 (2014).\\n  %%CITATION = CHPHD,C38,090001;%%\\n  %2276 citations \
+counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Braaten:1993mp}\\n\\\\bibitem{Braaten:1993mp}\\n  \
+E.~Braaten, K.~m.~Cheung and T.~C.~Yuan,\\n  %``Z0 decay into charmonium via \
+charm quark fragmentation,''\\n  Phys.\\\\ Rev.\\\\ D {\\\\bf 48}, 4230 \
+(1993)  [hep-ph/9302307].\\n  %%CITATION = HEP-PH/9302307;%%  %205 citations \
+counted in INSPIRE as of 10 Nov \
+2015\\n\\n%\\\\cite{Braaten:1993rw}\\n\\\\bibitem{Braaten:1993rw}\\n  \
+E.~Braaten and T.~C.~Yuan,\\n  %``Gluon fragmentation into heavy \
+quarkonium,''\\n  Phys.\\\\ Rev.\\\\ Lett.\\\\  {\\\\bf 71}, 1673 (1993)  \
+[hep-ph/9303205].\\n  %%CITATION = HEP-PH/9303205;%%  %256 citations counted \
+in INSPIRE as of 10 Nov \
+2015\\n\\n%\\\\cite{Jia:2008ep}\\n\\\\bibitem{Jia:2008ep}\\n  Y.~Jia and \
+D.~Yang,\\n  %``Refactorizing NRQCD short-distance coefficients in exclusive \
+quarkonium production,''\\n  Nucl.\\\\ Phys.\\\\ B {\\\\bf 814}, 217 (2009)  \
+[arXiv:0812.1965 [hep-ph]].  %%CITATION = ARXIV:0812.1965;%%  %16 citations \
+counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Jia:2010fw}\\n\\\\bibitem{Jia:2010fw}\\n  Y.~Jia, \
+J.~X.~Wang and D.~Yang,\\n  %``Bridging light-cone and NRQCD approaches: \
+asymptotic behavior of $B_c$ electromagnetic form factor,''\\n  JHEP {\\\\bf \
+1110}, 105 (2011)  [arXiv:1012.6007 [hep-ph]].  %%CITATION = \
+ARXIV:1012.6007;%%  %12 citations counted in INSPIRE as of 12 Nov 2015\\n\\n%\
+\\\\cite{Beneke:1997zp}\\n\\\\bibitem{Beneke:1997zp}\\n  M.~Beneke and \
+V.~A.~Smirnov,\\n  %``Asymptotic expansion of Feynman integrals near \
+threshold,''\\n  Nucl.\\\\ Phys.\\\\ B {\\\\bf 522}, 321 (1998)  \
+[hep-ph/9711391].\\n  %%CITATION = HEP-PH/9711391;%%  %381 citations counted \
+in INSPIRE as of 10 Nov \
+2015\\n\\n%\\\\cite{Braaten:1996jt}\\n\\\\bibitem{Braaten:1996jt}\\nE.~\
+Braaten and Y.~Q.~Chen,\\n%``Helicity decomposition for inclusive J / psi \
+production,''\\nPhys.\\\\ Rev.\\\\ D {\\\\bf 54}, 3216 (1996)   \
+[hep-ph/9604237].\\n%%CITATION = HEP-PH/9604237;%%   %110 citations counted \
+in INSPIRE as of 28 Oct \
+2015\\n\\n%\\\\cite{Braguta:2006wr}\\n\\\\bibitem{Braguta:2006wr}\\n  \
+V.~V.~Braguta, A.~K.~Likhoded and A.~V.~Luchinsky,\\n  %``The Study of \
+leading twist light cone wave function of eta(c) meson,''\\n  Phys.\\\\ Lett.\
+\\\\ B {\\\\bf 646}, 80 (2007)\\n  [hep-ph/0611021].\\n  %%CITATION = \
+HEP-PH/0611021;%%\\n  %42 citations counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Czarnecki:1997vz}\\n\\\\bibitem{Czarnecki:1997vz}\\n  \
+A.~Czarnecki and K.~Melnikov,\\n  %``Two loop QCD corrections to the heavy \
+quark pair production cross-section in e+ e- annihilation near the \
+threshold,''\\n  Phys.\\\\ Rev.\\\\ Lett.\\\\  {\\\\bf 80} (1998) 2531\\n  \
+[hep-ph/9712222].\\n  %%CITATION = HEP-PH/9712222;%%\\n  %169 citations \
+counted in INSPIRE as of 11 Apr \
+2015\\n\\n%\\\\cite{Beneke:1997jm}\\n\\\\bibitem{Beneke:1997jm}\\n  \
+M.~Beneke, A.~Signer and V.~A.~Smirnov,\\n  %``Two loop correction to the \
+leptonic decay of quarkonium,''\\n  Phys.\\\\ Rev.\\\\ Lett.\\\\  {\\\\bf 80} \
+(1998) 2535\\n  [hep-ph/9712302].\\n  %%CITATION = HEP-PH/9712302;%%\\n  %155 \
+citations counted in INSPIRE as of 11 Apr \
+2015\\n\\n%\\\\cite{Czarnecki:2001zc}\\n\\\\bibitem{Czarnecki:2001zc}\\n  \
+A.~Czarnecki and K.~Melnikov,\\n  %``Charmonium decays: J / psi ---> e+ e- \
+and eta(c) ---> gamma gamma,''\\n  Phys.\\\\ Lett.\\\\ B {\\\\bf 519} (2001) \
+212\\n  [hep-ph/0109054].\\n  %%CITATION = HEP-PH/0109054;%%\\n  %31 \
+citations counted in INSPIRE as of 11 Apr \
+2015\\n\\n%\\\\cite{Lepage:1979zb}\\n\\\\bibitem{Lepage:1979zb}\\n  \
+G.~P.~Lepage and S.~J.~Brodsky,\\n  %``Exclusive Processes in Quantum \
+Chromodynamics: Evolution Equations for Hadronic Wave Functions and the \
+Form-Factors of Mesons,''\\n  Phys.\\\\ Lett.\\\\ B {\\\\bf 87}, 359 \
+(1979).\\n  %%CITATION = PHLTA,B87,359;%%\\n  %1113 citations counted in \
+INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Efremov:1979qk}\\n\\\\bibitem{Efremov:1979qk}\\n  \
+A.~V.~Efremov and A.~V.~Radyushkin,\\n  %``Factorization and Asymptotical \
+Behavior of Pion Form-Factor in QCD,''\\n  Phys.\\\\ Lett.\\\\ B {\\\\bf 94}, \
+245 (1980).\\n  %%CITATION = PHLTA,B94,245;%%\\n  %927 citations counted in \
+INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Ma:2013yla}\\n\\\\bibitem{Ma:2013yla}\\n  Y.~Q.~Ma, \
+J.~W.~Qiu and H.~Zhang,\\n  %``Heavy quarkonium fragmentation functions from \
+a heavy quark pair. I. $S$ wave,''\\n  Phys.\\\\ Rev.\\\\ D {\\\\bf 89}, no. \
+9, 094029 (2014)\\n  [arXiv:1311.7078 [hep-ph]].\\n  %%CITATION = \
+ARXIV:1311.7078;%%\\n  %25 citations counted in INSPIRE as of 12 Nov \
+2015\\n\\n%\\\\cite{Lepage:1980fj}\\n\\\\bibitem{Lepage:1980fj}\\n  \
+G.~P.~Lepage and S.~J.~Brodsky,\\n  %``Exclusive Processes in Perturbative \
+Quantum Chromodynamics,''\\n  Phys.\\\\ Rev.\\\\ D {\\\\bf 22}, 2157 \
+(1980).\\n  %%CITATION = PHRVA,D22,2157;%%\\n  %2976 citations counted in \
+INSPIRE as of 12 Nov \
+2015\\n\\n\\n\\\\end{thebibliography}\\n\\\\end{document}\"\>"], "Output",
+ CellChangeTimes->{{3.656670027897434*^9, 3.656670039513166*^9}, 
+   3.6566832356220284`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<bib.txt\>\"", ",", 
+   RowBox[{"BibGen", "[", "Str", "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6564226588729143`*^9, 3.6564226643444858`*^9}, {
+  3.6564229060488214`*^9, 3.6564229194441977`*^9}}],
+
+Cell[BoxData[
+ FormBox["\<\"bib.txt\"\>", TraditionalForm]], "Output",
+ CellChangeTimes->{
+  3.6564221898190093`*^9, 3.656422537774971*^9, {3.656422661852784*^9, 
+   3.6564226652089596`*^9}, 3.656422794036463*^9, {3.6564228529618063`*^9, 
+   3.6564228829528537`*^9}, 3.6564229202210526`*^9}]
+}, Open  ]]
+},
+WindowSize->{1920, 976},
+WindowMargins->{{-9, Automatic}, {Automatic, -9}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 434, 9, 45, "Input"],
+Cell[995, 31, 3124, 79, 249, "Input"],
+Cell[4122, 112, 178, 4, 45, "Input"],
+Cell[4303, 118, 1597, 43, 162, "Input"],
+Cell[5903, 163, 2001, 48, 191, "Input"],
+Cell[CellGroupData[{
+Cell[7929, 215, 184, 3, 45, "Input"],
+Cell[8116, 220, 14431, 206, 9164, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22584, 431, 255, 5, 45, "Input"],
+Cell[22842, 438, 291, 5, 44, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
